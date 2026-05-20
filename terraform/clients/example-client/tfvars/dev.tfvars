@@ -1,7 +1,5 @@
 environment = "dev"
 
-domain_name = "dev.example.com"
+domain_name = "dev.wds-example-client.com"
 
-acm_certificate_arn = ""
-
-aliases = ["dev.example.com"]
+aliases = ["dev.wds-example-client.com"]

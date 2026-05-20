@@ -81,11 +81,14 @@ resource "aws_cloudfront_distribution" "site" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = var.acm_certificate_arn
-    ssl_support_method  = "sni-only"
+    acm_certificate_arn      = aws_acm_certificate_validation.site.certificate_arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 
   tags = local.common_tags
+
+  depends_on = [aws_acm_certificate_validation.site]
 }
 
 
@@ -108,7 +111,7 @@ resource "aws_s3_bucket_policy" "allow_cloudfront" {
 
         Action = "s3:GetObject"
 
-        Resource = "${aws_s3_bucket.site.arn}/*"
+        Resource = [aws_s3_bucket.site.arn, "${aws_s3_bucket.site.arn}/*"]
 
         Condition = {
           StringEquals = {

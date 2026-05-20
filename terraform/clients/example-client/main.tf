@@ -6,6 +6,4 @@ module "example_client_site" {
 
   domain_name  = var.domain_name
   aliases = var.aliases
-
-  acm_certificate_arn = var.acm_certificate_arn
 }

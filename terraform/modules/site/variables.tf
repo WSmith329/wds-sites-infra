@@ -19,11 +19,6 @@ variable "aliases" {
   description = "Additional CloudFront aliases (e.g. www + root domain)"
 }
 
-variable "acm_certificate_arn" {
-  type        = string
-  description = "ACM certificate ARN (must be in us-east-1 for CloudFront)"
-}
-
 variable "price_class" {
   type        = string
   default     = "PriceClass_100"
@@ -32,4 +27,9 @@ variable "price_class" {
 variable "tags" {
   type        = map(string)
   default     = {}
+}
+
+variable "aws_region" {
+  type = string
+  default = "eu-west-2"
 }
