@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy a Client Site
 
 on:
   workflow_dispatch:
@@ -19,7 +19,22 @@ on:
           - example-client
 
 jobs:
-  terraform:
+  echo-inputs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Echo Terraform inputs
+        run: |
+          echo "=============================="
+          echo "====   Deployment Inputs   ==="
+          echo "=============================="
+
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Client: ${{ github.event.inputs.client }}"
+          echo "=============================="
+
+
+  run-terraform:
     runs-on: ubuntu-latest
 
     permissions:
