@@ -48,7 +48,9 @@ jobs:
 
       - name: Terraform Init
         working-directory: ${{ env.WORKING_DIR }}
-        run: terraform init
+        run: |
+          terraform init \
+            -backend-config=backend_config/${{ github.event.inputs.environment }}.conf
 
       # --- Select tfvars dynamically ---
       - name: Terraform Plan
