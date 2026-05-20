@@ -1,5 +1,5 @@
 environment = "dev"
 
-domain_name = "dev.wds-example-client.com"
+domain_name = "wds-example-client.com"
 
-aliases = ["dev.wds-example-client.com"]
+aliases = ["wds-example-client.com"]
