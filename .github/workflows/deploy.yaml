@@ -34,6 +34,7 @@ jobs:
 
   run-terraform:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
 
     permissions:
       id-token: write
