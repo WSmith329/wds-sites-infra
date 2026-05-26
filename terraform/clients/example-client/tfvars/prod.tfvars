@@ -1,5 +1,3 @@
 environment = "prod"
 
-domain_name = "wds-example-client.com"
-
-aliases = ["wds-example-client.com"]
+root_domain = "wds-example-client.com"

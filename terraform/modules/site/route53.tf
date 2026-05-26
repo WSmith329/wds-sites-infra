@@ -1,5 +1,5 @@
 data "aws_route53_zone" "site" {
-  name         = trimsuffix(var.domain_name, ".")
+  name         = var.root_domain
   private_zone = false
 }
 
@@ -21,7 +21,7 @@ resource "aws_route53_record" "acm_validation" {
 }
 
 resource "aws_route53_record" "site" {
-  for_each = local.all_domains
+  for_each = toset(local.aliases)
 
   zone_id = data.aws_route53_zone.site.zone_id
   name    = each.value

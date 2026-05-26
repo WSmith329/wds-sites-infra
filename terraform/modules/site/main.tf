@@ -39,7 +39,7 @@ resource "aws_cloudfront_origin_access_control" "site" {
   description                       = "OAC for ${var.site_name}"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
-  signing_protocol                 = "sigv4"
+  signing_protocol                  = "sigv4"
 }
 
 resource "aws_cloudfront_distribution" "site" {
@@ -48,7 +48,7 @@ resource "aws_cloudfront_distribution" "site" {
   default_root_object = "index.html"
   price_class         = var.price_class
 
-  aliases = length(var.aliases) > 0 ? var.aliases : [var.domain_name]
+  aliases = local.aliases
 
   origin {
     domain_name              = aws_s3_bucket.site.bucket_regional_domain_name
@@ -87,8 +87,6 @@ resource "aws_cloudfront_distribution" "site" {
   }
 
   tags = local.common_tags
-
-  depends_on = [aws_acm_certificate_validation.site]
 }
 
 

@@ -8,28 +8,22 @@ variable "environment" {
   description = "dev or prod"
 }
 
-variable "domain_name" {
+variable "root_domain" {
   type        = string
   description = "Primary domain (e.g. client.com or www.client.com)"
 }
 
-variable "aliases" {
-  type        = list(string)
-  default     = []
-  description = "Additional CloudFront aliases (e.g. www + root domain)"
-}
-
 variable "price_class" {
-  type        = string
-  default     = "PriceClass_100"
+  type    = string
+  default = "PriceClass_100"
 }
 
 variable "tags" {
-  type        = map(string)
-  default     = {}
+  type    = map(string)
+  default = {}
 }
 
 variable "aws_region" {
-  type = string
+  type    = string
   default = "eu-west-2"
 }

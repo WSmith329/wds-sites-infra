@@ -15,7 +15,7 @@ output "cloudfront_domain_name" {
 }
 
 output "site_url" {
-  value = "https://${var.domain_name}"
+  value = "https://${local.domain_name}"
 }
 
 output "acm_certificate_arn" {

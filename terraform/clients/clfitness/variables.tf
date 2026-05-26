@@ -2,11 +2,6 @@ variable "environment" {
   type = string
 }
 
-variable "domain_name" {
+variable "root_domain" {
   type = string
-}
-
-variable "aliases" {
-  type    = list(string)
-  default = []
 }

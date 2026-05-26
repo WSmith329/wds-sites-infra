@@ -1,5 +1,3 @@
 environment = "prod"
 
-domain_name = "chloeleannefitness.com"
-
-aliases = ["chloeleannefitness.com"]
+root_domain = "chloeleannefitness.com"
