@@ -1,7 +1,7 @@
 module "api" {
-  source = "./modules/api-gateway"
+  source = "../../modules/api-gateway"
 
-  name = "${local.site_name}-api"
+  api_name = "${local.site_name}-api"
 
   environment = var.environment
 
@@ -9,5 +9,5 @@ module "api" {
 
   cors_allowed_methods = ["POST", "OPTIONS"]
 
-  acm_certificate_arn = var.acm_cert_arn
+  acm_certificate_arn = module.chloe_leanne_fitness_site.acm_certificate_arn
 }
