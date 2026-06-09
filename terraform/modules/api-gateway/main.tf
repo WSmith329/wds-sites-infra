@@ -1,5 +1,5 @@
-resource "aws_apigatewayv2_api" "api" {
-  name          = var.site_name
+resource "aws_apigatewayv2_api" "this" {
+  name          = var.api_name
   protocol_type = "HTTP"
 
   cors_configuration {
@@ -21,7 +21,7 @@ resource "aws_apigatewayv2_stage" "default" {
   }
 }
 
-resource "aws_apigatewayv2_domain_name" "api" {
+resource "aws_apigatewayv2_domain_name" "this" {
   domain_name = "api.${var.site_domain_name}"
 
   domain_name_configuration {
@@ -31,9 +31,9 @@ resource "aws_apigatewayv2_domain_name" "api" {
   }
 }
 
-resource "aws_apigatewayv2_api_mapping" "api" {
+resource "aws_apigatewayv2_api_mapping" "this" {
   api_id      = aws_apigatewayv2_api.this.id
-  domain_name = aws_apigatewayv2_domain_name.api.id
+  domain_name = aws_apigatewayv2_domain_name.this.id
   stage       = aws_apigatewayv2_stage.default.id
 }
 

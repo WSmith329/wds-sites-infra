@@ -1,4 +1,4 @@
-variable "site_name" {
+variable "api_name" {
   type        = string
   description = "Name of the API Gateway"
 }
@@ -38,14 +38,8 @@ variable "throttle_rate_limit" {
   default = 50
 }
 
-# Custom domain
-variable "api_domain_name" {
-  type = string
-}
-
 variable "acm_certificate_arn" {
-  type    = string
-  default = null
+  type = string
 }
 
 # WAF
