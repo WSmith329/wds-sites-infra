@@ -1,7 +1,7 @@
 resource "aws_lambda_function" "enquiry" {
   function_name = "enquiry-form-handler"
 
-  s3_bucket = aws_s3_bucket.lambda_artifacts.bucket
+  s3_bucket = "${var.environment}-wds-lambda-artifacts"
   s3_key    = "${var.site_dir}/enquiry_form.zip"
 
   handler = "lambda_handler.lambda_handler"
