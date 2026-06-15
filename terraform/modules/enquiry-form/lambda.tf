@@ -1,14 +1,8 @@
-data "aws_s3_object" "enquiry_form" {
-  bucket = aws_s3_bucket.lambda_artifacts.bucket
-  key    = "${var.site_dir}/enquiry_form.zip"
-}
-
 resource "aws_lambda_function" "enquiry" {
   function_name = "enquiry-form-handler"
 
-  s3_bucket         = data.aws_s3_object.enquiry_form.bucket
-  s3_key            = data.aws_s3_object.enquiry_form.key
-  s3_object_version = data.aws_s3_object.enquiry_form.version_id
+  s3_bucket = aws_s3_bucket.lambda_artifacts.bucket
+  s3_key    = "${var.site_dir}/enquiry_form.zip"
 
   handler = "lambda_handler.lambda_handler"
   runtime = "python3.13"
