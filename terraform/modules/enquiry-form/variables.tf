@@ -2,6 +2,10 @@ variable "site_dir" {
   type = string
 }
 
+variable "environment" {
+  type = string
+}
+
 variable "api_id" {
   type = string
 }
