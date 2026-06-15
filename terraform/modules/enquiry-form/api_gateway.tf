@@ -1,17 +1,17 @@
-resource "aws_apigatewayv2_api" "enquiry" {
-  name          = "${var.site_name}-enquiry-api"
-  protocol_type = "HTTP"
+resource "aws_apigatewayv2_integration" "enquiry" {
+  api_id = var.api_id
 
-  cors_configuration {
-    allow_origins = var.environment == "prod" ? [
-      "https://${var.root_domain}",
-      "https://www.${var.root_domain}"
-      ] : [
-      "https://${var.environment}.${var.root_domain}",
-      "https://www.${var.environment}.${var.root_domain}"
-    ]
-    allow_methods = ["POST", "OPTIONS"]
-    allow_headers = ["content-type"]
-    max_age       = 300
-  }
+  integration_type = "AWS_PROXY"
+
+  integration_uri = aws_lambda_function.enquiry.invoke_arn
+
+  payload_format_version = "2.0"
+}
+
+resource "aws_apigatewayv2_route" "enquiry" {
+  api_id = var.api_id
+
+  route_key = "POST /enquiry"
+
+  target = "integrations/${aws_apigatewayv2_integration.enquiry.id}"
 }

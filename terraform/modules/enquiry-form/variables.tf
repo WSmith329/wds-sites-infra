@@ -1,14 +1,19 @@
-variable "site_name" {
-  type        = string
-  description = "Logical name for the site (used for tagging/naming)"
+variable "site_dir" {
+  type = string
 }
 
-variable "environment" {
-  type        = string
-  description = "dev or prod"
+variable "api_id" {
+  type = string
 }
 
-variable "root_domain" {
-  type        = string
-  description = "Primary domain (e.g. client.com or www.client.com)"
+variable "execution_arn" {
+  type = string
+}
+
+variable "owner_email" {
+  type = string
+}
+
+variable "from_email" {
+  type = string
 }

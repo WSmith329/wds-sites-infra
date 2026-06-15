@@ -5,3 +5,7 @@ variable "environment" {
 variable "root_domain" {
   type = string
 }
+
+variable "artifact_version" {
+  type = string
+}
