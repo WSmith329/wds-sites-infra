@@ -22,6 +22,6 @@ output "acm_certificate_arn" {
   value = aws_acm_certificate.site.arn
 }
 
-output "regional_acm_certificate_arn" {
-  value = aws_acm_certificate.regional_wildcard.arn
+output "api_acm_certificate_arn" {
+  value = aws_acm_certificate.api.arn
 }
