@@ -1,5 +1,5 @@
 resource "aws_apigatewayv2_api" "this" {
-  name          = "${var.environment}-${var.api_name}"
+  name          = var.environment == "prod" ? var.api_name : "${var.environment}-${var.api_name}"
   protocol_type = "HTTP"
 
   cors_configuration {
@@ -22,7 +22,7 @@ resource "aws_apigatewayv2_stage" "default" {
 }
 
 resource "aws_apigatewayv2_domain_name" "this" {
-  domain_name = "${var.environment}.api.${var.site_domain_name}"
+  domain_name = var.environment == "prod" ? "api.${var.site_domain_name}" : "api.${var.environment}.${var.site_domain_name}"
 
   domain_name_configuration {
     certificate_arn = var.acm_certificate_arn
