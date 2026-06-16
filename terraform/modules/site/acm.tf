@@ -1,7 +1,7 @@
 resource "aws_acm_certificate" "site" {
   provider                  = aws.us_east_1
   domain_name               = var.root_domain
-  subject_alternative_names = ["*.${var.root_domain}"]
+  subject_alternative_names = ["*.${var.root_domain}", "*.dev.${var.root_domain}"]
 
   validation_method = "DNS"
 
@@ -21,7 +21,7 @@ resource "aws_acm_certificate_validation" "site" {
 
 resource "aws_acm_certificate" "regional_wildcard" {
   domain_name               = var.root_domain
-  subject_alternative_names = ["*.${var.root_domain}"]
+  subject_alternative_names = ["*.${var.root_domain}", "*.dev.${var.root_domain}"]
 
   validation_method = "DNS"
 
