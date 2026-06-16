@@ -34,19 +34,3 @@ resource "aws_route53_record" "site" {
     evaluate_target_health = false
   }
 }
-
-resource "aws_route53_record" "acm_validation_api" {
-  for_each = {
-    for dvo in aws_acm_certificate.api.domain_validation_options :
-    dvo.domain_name => dvo
-  }
-
-  allow_overwrite = true
-  zone_id         = data.aws_route53_zone.site.zone_id
-
-  name    = each.value.resource_record_name
-  type    = each.value.resource_record_type
-  records = [each.value.resource_record_value]
-
-  ttl = 60
-}

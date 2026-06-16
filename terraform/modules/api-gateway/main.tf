@@ -25,7 +25,7 @@ resource "aws_apigatewayv2_domain_name" "this" {
   domain_name = var.environment == "prod" ? "api.${var.site_domain_name}" : "api.${var.environment}.${var.site_domain_name}"
 
   domain_name_configuration {
-    certificate_arn = var.acm_certificate_arn
+    certificate_arn = aws_acm_certificate.api.arn
     endpoint_type   = "REGIONAL"
     security_policy = "TLS_1_2"
   }
