@@ -81,6 +81,16 @@ jobs:
 
           aws s3 cp build/ s3://$ARTIFACT_BUCKET/$ARTIFACT_PREFIX/ --recursive --exclude "*" --include "*.zip"
 
+      # --- Upload Resources ---
+      - name: Upload resources to S3
+        run: |
+          RESOURCES_BUCKET=${{ github.event.inputs.environment }}-wds-resources
+          CLIENT_DIR=${{ github.event.inputs.client }}
+
+          echo "Uploading to s3://$RESOURCES_BUCKET/$CLIENT_DIR/"
+
+          aws s3 sync resources/$CLIENT_DIR s3://$RESOURCES_BUCKET/$CLIENT_DIR/
+
       # --- Terraform Setup ---
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1

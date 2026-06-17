@@ -10,8 +10,10 @@ resource "aws_lambda_function" "enquiry" {
 
   environment {
     variables = {
-      OWNER_EMAIL = var.owner_email
-      FROM_EMAIL  = var.from_email
+      OWNER_EMAIL               = var.owner_email
+      FROM_EMAIL                = var.from_email
+      RESOURCES_BUCKET          = data.aws_s3_bucket.resources_bucket.bucket
+      ENQUIRY_FORM_TEMPLATE_KEY = "${var.site_dir}/emails/enquiry_receipt.html"
     }
   }
 }

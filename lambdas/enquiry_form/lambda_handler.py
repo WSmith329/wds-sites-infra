@@ -2,7 +2,10 @@ import json
 import os
 import boto3
 
+from string import Template
+
 ses = boto3.client("ses")
+s3 = boto3.client("s3")
 
 
 def lambda_handler(event, context):
@@ -10,15 +13,24 @@ def lambda_handler(event, context):
 
     name = body.get("name")
     email = body.get("email")
-    message = body.get("message")
 
-    if not all([name, email, message]):
+    if not all([name, email]):
         return {
             "statusCode": 400,
             "body": json.dumps({
                 "message": "Missing required fields"
             })
         }
+
+    resources_bucket = os.environ["RESOURCES_BUCKET"]
+    enquiry_form_template_key = os.environ["ENQUIRY_FORM_TEMPLATE_KEY"]
+
+    enquiry_form_template = s3.get_object(Bucket=resources_bucket, Key=enquiry_form_template_key)
+
+    enquiry_form_html = Template(enquiry_form_template).safe_substitute(
+        name=name,
+        year="2026"
+    )
 
     owner_email = os.environ["OWNER_EMAIL"]
     from_email = os.environ["FROM_EMAIL"]
@@ -33,13 +45,8 @@ def lambda_handler(event, context):
                 "Data": f"New enquiry from {name}"
             },
             "Body": {
-                "Text": {
-                    "Data": f"""
-Name: {name}
-Email: {email}
-
-{message}
-"""
+                "Html": {
+                    "Data": enquiry_form_html
                 }
             }
         }
