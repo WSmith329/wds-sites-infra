@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>New enquiry from {{ name }}</title>
+    <title>New enquiry from ${name}</title>
     <style>
         body {
             margin: 0;
@@ -75,25 +75,25 @@
         </div>
 
         <div class="header">
-            <h1>New Enquiry from {{ name }}</h1>
+            <h1>New Enquiry from ${name}</h1>
         </div>
 
         <div class="content">
             <p>Hi Chloe,</p>
 
-            <p><b>{{ name }}</b> has submitted a coaching enquiry form!</p>
+            <p><b>${name}</b> has submitted a coaching enquiry form!</p>
 
             <div class="message-box">
-                <p><b>Full Name:</b> {{ name }}</p>
-                <p><b>Email Address:</b> {{ email }}</p>
-                <p><b>Phone Number:</b> {{ phone }}</p>
-                <p><b>Which service are you enquiring about?</b> {{ enquiring_about }}</p>
-                <p><b>How much are you willing to pay for your service?</b> {{ will_pay }}</p>
-                <p><b>Have you worked with a personal trainer or a coach before?</b> {{ coached_before }}</p>
-                <p><b>What are your fitness goals?</b> {{ fitness_goals }}</p>
+                <p><b>Full Name:</b> ${name}</p>
+                <p><b>Email Address:</b> ${email}</p>
+                <p><b>Phone Number:</b> ${phone}</p>
+                <p><b>Which service are you enquiring about?</b> ${enquiring_about}</p>
+                <p><b>How much are you willing to pay for your service?</b> ${will_pay}</p>
+                <p><b>Have you worked with a personal trainer or a coach before?</b> ${coached_before}</p>
+                <p><b>What are your fitness goals?</b> ${fitness_goals}</p>
             </div>
 
-            <p>Reach out to <b>{{ name }}</b> at <b>{{ email }}</b> or <b>{{ phone }}</b>.</p>
+            <p>Reach out to <b>${name}</b> at <b>${email}</b> or <b>${phone}</b>.</p>
         </div>
 
         <div class="footer">
