@@ -8,6 +8,6 @@ module "enquiry_form" {
   api_id        = module.api.api_id
   execution_arn = module.api.execution_arn
 
-  owner_email = "willdsmith329@gmail.com"
+  owner_email = var.owner_email
   from_email  = "no-reply@chloeleannefitness.com"
 }

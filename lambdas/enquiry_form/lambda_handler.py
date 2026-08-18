@@ -23,14 +23,14 @@ def lambda_handler(event, context):
         }
 
     resources_bucket = os.environ["RESOURCES_BUCKET"]
-    enquiry_form_template_key = os.environ["ENQUIRY_FORM_TEMPLATE_KEY"]
 
-    enquiry_form_template = s3.get_object(Bucket=resources_bucket, Key=enquiry_form_template_key)
+    enquiry_form_template = s3.get_object(Bucket=resources_bucket, Key=os.environ["ENQUIRY_FORM_TEMPLATE_KEY"])
+    enquiry_receipt_template = s3.get_object(Bucket=resources_bucket, Key=os.environ["ENQUIRY_RECEIPT_TEMPLATE_KEY"])
 
     enquiry_form_html = Template(enquiry_form_template).safe_substitute(
-        name=name,
-        year="2026"
+        **body
     )
+    enquiry_receipt_html = Template(enquiry_receipt_template).safe_substitute(name=name)
 
     owner_email = os.environ["OWNER_EMAIL"]
     from_email = os.environ["FROM_EMAIL"]
@@ -46,7 +46,7 @@ def lambda_handler(event, context):
             },
             "Body": {
                 "Html": {
-                    "Data": enquiry_form_html
+                    "Data": enquiry_form_template
                 }
             }
         }
@@ -62,11 +62,8 @@ def lambda_handler(event, context):
                 "Data": "We've received your enquiry"
             },
             "Body": {
-                "Text": {
-                    "Data": (
-                        "Thank you for getting in touch. "
-                        "We'll respond as soon as possible."
-                    )
+                "Html": {
+                    "Data": enquiry_receipt_html
                 }
             }
         }

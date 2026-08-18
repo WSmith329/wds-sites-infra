@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>We've received your enquiry</title>
+    <title>New enquiry from {{ name }}</title>
     <style>
         body {
             margin: 0;
@@ -38,6 +38,14 @@
             line-height: 1.6;
         }
 
+        .message-box {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #c1e1c1;
+        }
+
         .footer {
             margin-top: 10px;
             font-size: 12px;
@@ -67,17 +75,25 @@
         </div>
 
         <div class="header">
-            <h1>Confirmation of Coaching Enquiry</h1>
+            <h1>New Enquiry from {{ name }}</h1>
         </div>
 
         <div class="content">
-            <p>Hi {{ name }},</p>
+            <p>Hi Chloe,</p>
 
-            <p>Thank you for filling out my coaching enquiry form!</p>
+            <p><b>{{ name }}</b> has submitted a coaching enquiry form!</p>
 
-            <p>I will be in touch with you as soon as possible to discuss details on the next steps of your journey.</p>
+            <div class="message-box">
+                <p><b>Full Name:</b> {{ name }}</p>
+                <p><b>Email Address:</b> {{ email }}</p>
+                <p><b>Phone Number:</b> {{ phone }}</p>
+                <p><b>Which service are you enquiring about?</b> {{ enquiring_about }}</p>
+                <p><b>How much are you willing to pay for your service?</b> {{ will_pay }}</p>
+                <p><b>Have you worked with a personal trainer or a coach before?</b> {{ coached_before }}</p>
+                <p><b>What are your fitness goals?</b> {{ fitness_goals }}</p>
+            </div>
 
-            <p>Many thanks,<br>Chloe :)</p>
+            <p>Reach out to <b>{{ name }}</b> at <b>{{ email }}</b> or <b>{{ phone }}</b>.</p>
         </div>
 
         <div class="footer">
