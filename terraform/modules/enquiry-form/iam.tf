@@ -1,5 +1,5 @@
 resource "aws_iam_role" "lambda" {
-  name = "enquiry-form-lambda-role"
+  name = "${var.environment}-${var.site_name}-enquiry-form-lambda-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
