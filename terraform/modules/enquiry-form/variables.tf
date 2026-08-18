@@ -2,6 +2,11 @@ variable "site_dir" {
   type = string
 }
 
+variable "site_name" {
+  type        = string
+  description = "Logical name for the site (used for tagging/naming)"
+}
+
 variable "environment" {
   type = string
 }

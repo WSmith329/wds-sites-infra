@@ -1,6 +1,8 @@
 module "enquiry_form" {
   source = "../../modules/enquiry-form"
 
+  site_name = local.site_name
+
   environment = var.environment
 
   site_dir = local.site_dir
