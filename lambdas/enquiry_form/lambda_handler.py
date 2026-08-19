@@ -7,6 +7,11 @@ from string import Template
 ses = boto3.client("ses")
 s3 = boto3.client("s3")
 
+def _get_email_html(template_key: str, substitutions: dict) -> str:
+    resources_bucket = os.environ["RESOURCES_BUCKET"]
+    template_content = s3.get_object(Bucket=resources_bucket, Key=template_key)["Body"].read().decode("utf-8")
+    return Template(template_content).safe_substitute(**substitutions)
+
 
 def lambda_handler(event, context):
     body = json.loads(event["body"])
@@ -24,16 +29,13 @@ def lambda_handler(event, context):
 
     resources_bucket = os.environ["RESOURCES_BUCKET"]
 
-    enquiry_form_template = s3.get_object(Bucket=resources_bucket, Key=os.environ["ENQUIRY_FORM_TEMPLATE_KEY"])["Body"].read().decode("utf-8")
-    enquiry_receipt_template = s3.get_object(Bucket=resources_bucket, Key=os.environ["ENQUIRY_RECEIPT_TEMPLATE_KEY"])["Body"].read().decode("utf-8")
-
-    enquiry_form_html = Template(enquiry_form_template).safe_substitute(
-        **body
-    )
-    enquiry_receipt_html = Template(enquiry_receipt_template).safe_substitute(name=name)
+    enquiry_form_html = _get_email_html(os.environ["ENQUIRY_FORM_TEMPLATE_KEY"], **body)
+    enquiry_receipt_html = _get_email_html(os.environ["ENQUIRY_RECEIPT_TEMPLATE_KEY"], {"name": name})
 
     owner_email = os.environ["OWNER_EMAIL"]
     from_email = os.environ["FROM_EMAIL"]
+    if from_display_name := os.environ.get("FROM_DISPLAY_NAME"):
+        from_email = f"{from_display_name} <{from_email}>"
 
     ses.send_email(
         Source=from_email,
@@ -46,7 +48,7 @@ def lambda_handler(event, context):
             },
             "Body": {
                 "Html": {
-                    "Data": enquiry_form_template
+                    "Data": enquiry_form_html
                 }
             }
         }

@@ -26,3 +26,8 @@ variable "owner_email" {
 variable "from_email" {
   type = string
 }
+
+variable "from_display_name" {
+  type = string
+  default = null
+}

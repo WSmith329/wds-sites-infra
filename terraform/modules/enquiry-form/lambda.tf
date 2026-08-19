@@ -9,13 +9,16 @@ resource "aws_lambda_function" "enquiry" {
   role    = aws_iam_role.lambda.arn
 
   environment {
-    variables = {
-      OWNER_EMAIL               = var.owner_email
-      FROM_EMAIL                = var.from_email
-      RESOURCES_BUCKET          = data.aws_s3_bucket.resources_bucket.bucket
-      ENQUIRY_FORM_TEMPLATE_KEY = "${var.site_dir}/emails/enquiry_form.html"
-      ENQUIRY_RECEIPT_TEMPLATE_KEY = "${var.site_dir}/emails/enquiry_receipt.html"
-    }
+    variables = merge(
+      {
+        OWNER_EMAIL               = var.owner_email
+        FROM_EMAIL                = var.from_email
+        RESOURCES_BUCKET          = data.aws_s3_bucket.resources_bucket.bucket
+        ENQUIRY_FORM_TEMPLATE_KEY = "${var.site_dir}/emails/enquiry_form.html"
+        ENQUIRY_RECEIPT_TEMPLATE_KEY = "${var.site_dir}/emails/enquiry_receipt.html"
+      },
+      var.from_display_name != null ? { FROM_DISPLAY_NAME = var.from_display_name } : {}
+    )
   }
 }
 
