@@ -29,7 +29,7 @@ def lambda_handler(event, context):
 
     resources_bucket = os.environ["RESOURCES_BUCKET"]
 
-    enquiry_form_html = _get_email_html(os.environ["ENQUIRY_FORM_TEMPLATE_KEY"], **body)
+    enquiry_form_html = _get_email_html(os.environ["ENQUIRY_FORM_TEMPLATE_KEY"], body)
     enquiry_receipt_html = _get_email_html(os.environ["ENQUIRY_RECEIPT_TEMPLATE_KEY"], {"name": name})
 
     owner_email = os.environ["OWNER_EMAIL"]
