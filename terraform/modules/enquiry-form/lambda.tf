@@ -4,6 +4,8 @@ resource "aws_lambda_function" "enquiry" {
   s3_bucket = "${var.environment}-wds-lambda-artifacts"
   s3_key    = "${var.site_dir}/enquiry_form.zip"
 
+  source_code_hash = filebase64sha256("${path.root}/build/enquiry_form.zip")
+
   handler = "lambda_handler.lambda_handler"
   runtime = "python3.13"
   role    = aws_iam_role.lambda.arn
