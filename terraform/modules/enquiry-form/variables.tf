@@ -31,3 +31,7 @@ variable "from_display_name" {
   type = string
   default = null
 }
+
+variable "build_dir" {
+  type = string
+}

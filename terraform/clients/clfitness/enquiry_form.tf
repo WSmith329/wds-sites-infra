@@ -13,4 +13,6 @@ module "enquiry_form" {
   owner_email = var.owner_email
   from_email  = "no-reply@chloeleannefitness.com"
   from_display_name = "Chloe Leanne"
+
+  build_dir = local.build_dir
 }

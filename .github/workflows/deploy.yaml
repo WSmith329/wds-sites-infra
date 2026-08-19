@@ -105,10 +105,12 @@ jobs:
         working-directory: ${{ env.WORKING_DIR }}
         run: |
           terraform plan \
-            -var-file=tfvars/${{ github.event.inputs.environment }}.tfvars
+            -var-file=tfvars/${{ github.event.inputs.environment }}.tfvars \
+            -var="github_workspace=${{ github.workspace }}"
 
       - name: Terraform Apply
         working-directory: ${{ env.WORKING_DIR }}
         run: |
           terraform apply -auto-approve \
-            -var-file=tfvars/${{ github.event.inputs.environment }}.tfvars
+            -var-file=tfvars/${{ github.event.inputs.environment }}.tfvars \
+            -var="github_workspace=${{ github.workspace }}"
