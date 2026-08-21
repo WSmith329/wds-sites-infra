@@ -8,6 +8,4 @@ module "api" {
   site_domain_name = var.root_domain
 
   cors_allowed_methods = ["POST", "OPTIONS"]
-
-  acm_certificate_arn = module.chloe_leanne_fitness_site.regional_acm_certificate_arn
 }

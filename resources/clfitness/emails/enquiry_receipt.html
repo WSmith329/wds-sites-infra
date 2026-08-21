@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>We've received your enquiry</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px 30px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 0 20px 0;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 22px;
+            color: #111111;
+        }
+
+        .content {
+            padding: 20px 0px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            border-top: 1px solid #eeeeee;
+            padding-top: 10px;
+        }
+
+        #branding-strip {
+            background: #c1e1c1;
+            text-align: center;
+        }
+
+        #branding-strip p {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="branding-strip" style="padding: 14px 10px;">
+            <img src="data:image/png;base64,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"
+                alt="Chloe Leanne Fitness Logo" width="50">
+        </div>
+
+        <div class="header">
+            <h1>Confirmation of Coaching Enquiry</h1>
+        </div>
+
+        <div class="content">
+            <p>Hi ${name},</p>
+
+            <p>Thank you for filling out my coaching enquiry form!</p>
+
+            <p>I will be in touch with you as soon as possible to discuss details on the next steps of your journey.</p>
+
+            <p>Many thanks,<br>Chloe :)</p>
+        </div>
+
+        <div class="footer">
+            <div id="branding-strip" style="padding: 4px 10px;">
+                <p>CHLOE LEANNE FITNESS</p>
+            </div>
+            <p>This is an automated confirmation email.</p>
+        </div>
+
+    </div>
+</body>
+
+</html>
