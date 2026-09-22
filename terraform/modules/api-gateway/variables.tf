@@ -38,10 +38,6 @@ variable "throttle_rate_limit" {
   default = 50
 }
 
-variable "acm_certificate_arn" {
-  type = string
-}
-
 # WAF
 variable "waf_acl_arn" {
   type    = string
